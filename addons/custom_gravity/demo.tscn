@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2js1ftq80bk4"]
+
+[ext_resource type="Script" uid="uid://ds8biuulikrtx" path="res://addons/custom_gravity/gravity_demo.gd" id="1_ob5oh"]
+[ext_resource type="Script" uid="uid://bm0t6i5e2tlwm" path="res://addons/custom_gravity/gravity/nodes/gravity_area_3d.gd" id="1_wicj2"]
+[ext_resource type="Script" uid="uid://koupueyifqco" path="res://addons/custom_gravity/gravity/types/cylinder_gravity.gd" id="3_ob5oh"]
+
+[sub_resource type="Resource" id="Resource_ob5oh"]
+script = ExtResource("3_ob5oh")
+metadata/_custom_type_script = "uid://koupueyifqco"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1yhv"]
+size = Vector3(20, 20, 20)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_crclo"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ya44r"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wicj2"]
+
+[node name="Demo" type="Node3D"]
+script = ExtResource("1_ob5oh")
+
+[node name="GravityArea3D" type="Area3D" parent="."]
+script = ExtResource("1_wicj2")
+gravity_resource = SubResource("Resource_ob5oh")
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityArea3D"]
+shape = SubResource("BoxShape3D_i1yhv")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6225753, 4.2786627, 3.7364435)
+linear_velocity = Vector3(0, 5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_crclo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("CapsuleMesh_ya44r")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wicj2")
