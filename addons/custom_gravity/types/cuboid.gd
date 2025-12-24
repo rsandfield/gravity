@@ -31,19 +31,11 @@ func _validate_depth():
 	if !invert:
 		return
 	var half_least_side = _bounds.get_shortest_axis_size() * 0.5
-	if _depth < half_least_side:
+	if _depth > half_least_side:
 		_depth = half_least_side
 
 
-func _get_segment(position: Vector3) -> Vector3:
-	# If inverted, the point should be inside. Otherwise, it should be outside.
-	if invert != _bounds.has_point(position):
-		return Vector3.ZERO
-
-	var deepened = _bounds.grow(-depth if invert else depth)
-	if !deepened.has_point(position):
-		return Vector3.ZERO
-
+func _get_outer_segment(position: Vector3) -> Vector3:
 	var center = _bounds.get_center()
 	var grav_vec = Vector3.ZERO
 
@@ -64,6 +56,41 @@ func _get_segment(position: Vector3) -> Vector3:
 
 	return grav_vec
 
+func _get_inner_segment(position: Vector3) -> Vector3:
+	var center = _bounds.get_center()
+	var grav_vec = Vector3.ZERO
+
+	if position.x < _bounds.position.x + depth:
+		grav_vec.x = -1
+	elif position.x > _bounds.size.x + _bounds.position.x - depth:
+		grav_vec.x = 1
+
+	if position.y < _bounds.position.y + depth:
+		grav_vec.y = -1
+	elif position.y > _bounds.size.y + _bounds.position.y - depth:
+		grav_vec.y = 1
+
+	if position.z < _bounds.position.z + depth:
+		grav_vec.z = -1
+	elif position.z > _bounds.size.z + _bounds.position.z - depth:
+		grav_vec.z = 1
+
+	return grav_vec
+
+
+func _get_segment(position: Vector3) -> Vector3:
+	# If inverted, the point should be inside. Otherwise, it should be outside.
+	if invert != _bounds.has_point(position):
+		return Vector3.ZERO
+
+	var deepened = _bounds.grow(-depth if invert else depth)
+	if invert == deepened.has_point(position):
+		return Vector3.ZERO
+	
+	if invert:
+		return _get_inner_segment(position)
+	return _get_outer_segment(position)
+
 
 func _get_edge_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 	# For edges, two axies will be 1. Making a new vector which only has a non-zero value on this
@@ -80,9 +107,10 @@ func _get_edge_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 
 
 func _get_corner_gravity(grav_vec: Vector3, position) -> Vector3:
-	var corner = _bounds.end * grav_vec
+	var corner_offset = Vector3.ONE * depth if invert else Vector3.ZERO
+	var corner = (_bounds.end - corner_offset) * grav_vec
 	var offset = corner - position
-	return offset.normalized() * gravity
+	return offset.normalized() * gravity * -1 if invert else 1
 
 
 func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
