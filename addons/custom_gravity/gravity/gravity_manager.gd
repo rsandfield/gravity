@@ -6,8 +6,18 @@ var bodies: Dictionary[PhysicsBody3D, Array] = {}
 func _physics_process(delta):
 	for body in bodies:
 		if body is RigidBody3D:
-			for area in bodies[body]:
-				body.linear_velocity += area.get_gravity_at(body.transform) * delta
+			body.linear_velocity += get_gravity(body) * delta
+
+func get_gravity(body: PhysicsBody3D):
+	if !bodies.has(body):
+		return Vector3.ZERO
+	
+	var total_gravity = Vector3.ZERO
+
+	for area in bodies[body]:
+		total_gravity += area.get_gravity_at(body.transform)
+	
+	return total_gravity
 
 func register_gravity_area(area: GravityArea3D):
 	areas[area] = []
