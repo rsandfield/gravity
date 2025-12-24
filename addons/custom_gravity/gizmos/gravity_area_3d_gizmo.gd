@@ -4,6 +4,7 @@ extends EditorNode3DGizmo
 var cone: CylinderMesh = CylinderMesh.new()
 var _node: GravityArea3D
 
+
 func _init_cone():
 	cone.top_radius = 0
 	cone.bottom_radius = 0.1
@@ -63,25 +64,15 @@ func _draw_arrow(node: GravityArea3D, x: float, y: float, z: float):
 	var query = PhysicsPointQueryParameters3D.new()
 	query.position = pos
 	var results = node.get_world_3d().direct_space_state.intersect_point(query)
-	
+
 	if _is_point_in_shape(pos):
 		var up_vec = Vector3.UP
 		if is_equal_approx(abs(grav.normalized().dot(up_vec)), 1):
 			up_vec = Vector3.RIGHT
 		var basis = Basis.looking_at(grav, up_vec)
 		var material = get_plugin().get_material("main", self)
-		add_mesh(
-			cone,
-			material,
-			Transform3D(basis, pos).rotated_local(Vector3.RIGHT, -PI * 0.5)
-		)
-		add_lines(
-			[
-				pos,
-				pos - grav.normalized()
-			],
-			material
-		)
+		add_mesh(cone, material, Transform3D(basis, pos).rotated_local(Vector3.RIGHT, -PI * 0.5))
+		add_lines([pos, pos - grav.normalized()], material)
 
 
 func _redraw():
@@ -100,7 +91,7 @@ func _redraw():
 	var x = bounds.position.x + x_step * 0.5
 	var y = bounds.position.y + y_step * 0.5
 	var z = bounds.position.z + z_step * 0.5
-	
+
 	var lines = PackedVector3Array()
 	while x <= bounds.end.x:
 		while y <= bounds.end.y:
@@ -109,6 +100,6 @@ func _redraw():
 				z += z_step
 			z = bounds.position.z + z_step * 0.5
 			y += y_step
-			
+
 		y = bounds.position.y + y_step * 0.5
 		x += x_step

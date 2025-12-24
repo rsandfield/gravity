@@ -17,6 +17,7 @@ extends Gravity
 ## When true, gravity will be inverted and push away from the center.
 @export var invert: bool = false
 
+
 func get_gravity_at(position: Vector3) -> Vector3:
 	var closest_point = Geometry3D.get_closest_point_to_segment_uncapped(position, point_a, point_b)
 	var offset = closest_point - position
@@ -28,9 +29,5 @@ func get_gravity_at(position: Vector3) -> Vector3:
 	if peak_radius <= 0:
 		# constant strength
 		return base_vector
-	
-	return (
-		base_vector *
-		(offset.length_squared() - peak_radius) /
-		(peak_radius ** 0.5)
-	)
+
+	return base_vector * (offset.length_squared() - peak_radius) / (peak_radius ** 0.5)

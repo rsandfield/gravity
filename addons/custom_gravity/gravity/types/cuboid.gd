@@ -39,7 +39,7 @@ func _get_segment(position: Vector3) -> Vector3:
 	# If inverted, the point should be inside. Otherwise, it should be outside.
 	if invert != _bounds.has_point(position):
 		return Vector3.ZERO
-	
+
 	var deepened = _bounds.grow(-depth if invert else depth)
 	if !deepened.has_point(position):
 		return Vector3.ZERO
@@ -61,7 +61,7 @@ func _get_segment(position: Vector3) -> Vector3:
 		grav_vec.z = 1
 	elif position.z > _bounds.size.z + _bounds.position.z:
 		grav_vec.z = -1
-	
+
 	return grav_vec
 
 
@@ -73,7 +73,7 @@ func _get_edge_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 	var min_axis = grav_vec.abs().min_axis_index()
 	point_a[min_axis] = _bounds.end[min_axis]
 	point_b[min_axis] = -_bounds.end[min_axis]
-	
+
 	var closest_point = Geometry3D.get_closest_point_to_segment_uncapped(position, point_a, point_b)
 	var offset = closest_point - position
 	return offset.normalized()
@@ -97,12 +97,10 @@ func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 
 	if grav_vec.length_squared() == 3:
 		return _get_corner_gravity(grav_vec, position)
-	
-	return Vector3.ZERO
 
+	return Vector3.ZERO
 
 
 func get_gravity_at(position: Vector3) -> Vector3:
 	var grav_vec = _get_segment(position)
 	return _get_segment_gravity(grav_vec, position) * 9.81
-	

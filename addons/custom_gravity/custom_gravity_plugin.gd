@@ -1,9 +1,9 @@
 @tool
 extends EditorPlugin
 
-
 const GravityGizmo = preload("res://addons/custom_gravity/custom_gravity_gizmo.gd")
 var gizmo_plugin = GravityGizmo.new()
+
 
 func _enable_plugin():
 	# Add autoloads here.
@@ -24,8 +24,7 @@ func _enter_tree():
 	)
 
 	add_autoload_singleton(
-		"GravityManager",
-		"res://addons/custom_gravity/gravity/gravity_manager.gd"
+		"GravityManager", "res://addons/custom_gravity/gravity/gravity_manager.gd"
 	)
 
 	add_node_3d_gizmo_plugin(gizmo_plugin)

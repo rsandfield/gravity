@@ -52,14 +52,5 @@ func get_gravity_at(position: Vector3) -> Vector3:
 		return base_vector
 
 	if offset.length() > peak_radius:
-		return (
-			base_vector *
-			peak_radius ** 2 /
-			offset.length_squared()
-		)
-	return (
-		base_vector *
-		offset.length_squared() /
-		peak_radius ** 2
-	)
-	
+		return base_vector * peak_radius ** 2 / offset.length_squared()
+	return base_vector * offset.length_squared() / peak_radius ** 2

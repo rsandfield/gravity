@@ -6,11 +6,12 @@ extends Area3D
 
 var shape: CollisionShape3D
 
+
 func _ready():
 	var children = find_children("*", "CollisionShape3D", false)
 	if len(children) == 1:
 		shape = children[0] as CollisionShape3D
-	
+
 	if !Engine.is_editor_hint():
 		body_entered.connect(_on_body_entered)
 		body_exited.connect(_on_body_exited)

@@ -15,6 +15,7 @@ extends Gravity
 ## When true, gravity will be inverted and push away from the center.
 @export var invert: bool = false
 
+
 func get_gravity_at(position: Vector3) -> Vector3:
 	var offset = center - position
 	var base_vector = offset.normalized() * gravity
@@ -27,13 +28,5 @@ func get_gravity_at(position: Vector3) -> Vector3:
 		return base_vector
 
 	if offset.length() > peak_radius:
-		return (
-			base_vector *
-			peak_radius ** 2 /
-			offset.length_squared()
-		)
-	return (
-		base_vector *
-		offset.length_squared() /
-		peak_radius ** 2
-	)
+		return base_vector * peak_radius ** 2 / offset.length_squared()
+	return base_vector * offset.length_squared() / peak_radius ** 2
