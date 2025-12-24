@@ -57,6 +57,9 @@ func _draw_arrow(node: GravityArea3D, x: float, y: float, z: float):
 	var pos = Vector3(x, y, z)
 	var grav = node.gravity_resource.get_gravity_at(pos)
 
+	if is_zero_approx(grav.length()):
+		return
+
 	var query = PhysicsPointQueryParameters3D.new()
 	query.position = pos
 	var results = node.get_world_3d().direct_space_state.intersect_point(query)
