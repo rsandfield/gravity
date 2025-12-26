@@ -1,0 +1,23 @@
+name: Sync README
+on:
+  push:
+    paths:
+      - 'README.md'
+
+jobs:
+  copy:
+    runs-on: ubunto-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Copy files
+        run: cp README.md addons/custom_gravity/README.md
+      
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "action@github.com"
+          git add addons/custom_gravity/README.md
+          git commit -m "docs: sync README to plugin folder" || exit 0
+          git push
