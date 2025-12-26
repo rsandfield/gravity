@@ -1,11 +1,11 @@
 @tool
-class_name CuboidGravity
+class_name BoxGravity
 extends Gravity
 
 var _bounds: AABB = AABB(Vector3.ONE * -5, Vector3.ONE * 10)
 var _depth: float = 4
 
-## Size of the cuboid surface
+## Size of the box surface
 @export var size: Vector3:
 	set(value):
 		_bounds.size = value
@@ -13,7 +13,7 @@ var _depth: float = 4
 		_validate_depth()
 	get:
 		return _bounds.size
-## Depth of the gravity field away from the cuboid survace
+## Depth of the gravity field away from the box survace
 @export var depth: float:
 	set(value):
 		_depth = value
