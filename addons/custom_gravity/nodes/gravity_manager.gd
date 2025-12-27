@@ -19,12 +19,18 @@ func get_gravity(body: PhysicsBody3D):
 	
 	return total_gravity
 
+func _remove_body_area(body: PhysicsBody3D, area: GravityArea3D):
+	if bodies.has(body):
+		bodies[body].erase(area)
+		if bodies[body].is_empty():
+				bodies.erase(body)
+
 func register_gravity_area(area: GravityArea3D):
 	areas[area] = []
 
 func deregister_gravity_area(area: GravityArea3D):
 	for body in areas[area]:
-		body.erase(area)
+		_remove_body_area(body, area)
 	areas.erase(area)
 
 func body_entered_area(body: PhysicsBody3D, area: GravityArea3D):
@@ -35,5 +41,6 @@ func body_entered_area(body: PhysicsBody3D, area: GravityArea3D):
 		bodies[body].append(area)
 
 func body_exited_area(body: PhysicsBody3D, area: GravityArea3D):
-	areas[area].erase(body)
-	bodies[body].erase(area)
+	if areas.has(area):
+		areas[area].erase(body)
+	_remove_body_area(body, area)
