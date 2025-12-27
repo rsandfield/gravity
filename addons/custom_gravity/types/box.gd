@@ -110,7 +110,7 @@ func _get_corner_gravity(grav_vec: Vector3, position) -> Vector3:
 	var corner_offset = Vector3.ONE * depth if invert else Vector3.ZERO
 	var corner = (_bounds.end - corner_offset) * grav_vec
 	var offset = corner - position
-	return offset.normalized() * gravity * -1 if invert else 1
+	return offset.normalized() * gravity * (-1 if invert else 1)
 
 
 func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
