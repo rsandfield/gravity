@@ -56,6 +56,7 @@ func _get_outer_segment(position: Vector3) -> Vector3:
 
 	return grav_vec
 
+
 func _get_inner_segment(position: Vector3) -> Vector3:
 	var center = _bounds.get_center()
 	var grav_vec = Vector3.ZERO
@@ -86,7 +87,7 @@ func _get_segment(position: Vector3) -> Vector3:
 	var deepened = _bounds.grow(-depth if invert else depth)
 	if invert == deepened.has_point(position):
 		return Vector3.ZERO
-	
+
 	if invert:
 		return _get_inner_segment(position)
 	return _get_outer_segment(position)

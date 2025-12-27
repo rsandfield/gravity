@@ -23,9 +23,7 @@ func _enter_tree():
 		preload("res://addons/custom_gravity/nodes/gravity.svg")
 	)
 
-	add_autoload_singleton(
-		"GravityManager", "res://addons/custom_gravity/nodes/gravity_manager.gd"
-	)
+	add_autoload_singleton("GravityManager", "res://addons/custom_gravity/nodes/gravity_manager.gd")
 
 	add_node_3d_gizmo_plugin(gizmo_plugin)
 
