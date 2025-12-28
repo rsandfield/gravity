@@ -9,13 +9,35 @@ func _physics_process(delta):
 			body.linear_velocity += get_gravity(body) * delta
 
 func get_gravity(body: PhysicsBody3D):
+	# https://github.com/godotengine/godot/blob/63227bbc8ae5300319f14f8253c8158b846f355b/modules/godot_physics_3d/godot_body_3d.cpp#L497
 	if !bodies.has(body):
 		return Vector3.ZERO
 	
 	var total_gravity = Vector3.ZERO
 
-	for area in bodies[body]:
-		total_gravity += area.get_gravity_at(body.transform)
+	# Sort areas by priority, preserving seniority within each priority.
+	var body_areas = bodies[body].duplicate()
+	body_areas.sort_custom(func(a, b):
+		# When priority is equal, return the newest entry
+		if a.priority == b.priority:
+			return bodies[body].find(a) > bodies[body].find(b)
+		return a.priority > b.priority
+	)
+
+	for area in body_areas:
+		# area.gravity_mode
+		var area_gravity = area.get_gravity_at(body.global_transform.origin)
+		match area.gravity_mode:
+			Gravity.Mode.COMBINE:
+				total_gravity += area_gravity
+			Gravity.Mode.REPLACE:
+				total_gravity = area_gravity
+				break
+			Gravity.Mode.REPLACE_COMBINE:
+				total_gravity = area_gravity
+			Gravity.Mode.COMBINE_REPLACE:
+				total_gravity += area_gravity
+				break
 	
 	return total_gravity
 

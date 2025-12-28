@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ds8biuulikrtx" path="res://addons/custom_gravity/gravity_demo.gd" id="1_dar0o"]
 [ext_resource type="Script" uid="uid://bm0t6i5e2tlwm" path="res://addons/custom_gravity/nodes/gravity_area_3d.gd" id="2_j5lb4"]
 [ext_resource type="Script" uid="uid://dt86ul5pfl2dm" path="res://demo/character_controller.gd" id="2_u10mr"]
-[ext_resource type="Script" uid="uid://urjbxg7wojrv" path="res://addons/custom_gravity/types/box.gd" id="3_u10mr"]
+[ext_resource type="Script" uid="uid://bfu5frk1hgx31" path="res://addons/custom_gravity/types/point_gravity.gd" id="4_j5lb4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onu7k"]
 
@@ -12,11 +12,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_dar0o"]
 size = Vector3(10, 10, 10)
 
-[sub_resource type="Resource" id="Resource_s1s6j"]
-script = ExtResource("3_u10mr")
-size = Vector3(10, 10, 10)
-depth = 10.0
-metadata/_custom_type_script = "uid://urjbxg7wojrv"
+[sub_resource type="Resource" id="Resource_u10mr"]
+script = ExtResource("4_j5lb4")
+peak_radius = 0.0
+metadata/_custom_type_script = "uid://bfu5frk1hgx31"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_onvmd"]
 size = Vector3(30, 30, 30)
@@ -72,9 +71,10 @@ mesh = SubResource("CapsuleMesh_ya44r")
 shape = SubResource("BoxShape3D_dar0o")
 
 [node name="GravityArea3D" type="Area3D" parent="StaticBody3D"]
-gravity_space_override = 3
+gravity_space_override = 2
 script = ExtResource("2_j5lb4")
-gravity_resource = SubResource("Resource_s1s6j")
+gravity_resource = SubResource("Resource_u10mr")
+gravity_mode = null
 metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/GravityArea3D"]

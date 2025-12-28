@@ -50,6 +50,10 @@ Pulls or pushes towards a circle, forming a torroidal zone. Can either provide c
 
 Extend the `Gravity` type and give a useful name to the new type. The `get_gravity_at(position: Vector3) -> Vector3` function must be implemented, other than that have fun. What would a Perlin noise gravity field look like?
 
+## Gravity Modes
+
+Gravity modes in this plugin are equivelant to the native gravity modes with one key difference. Instead of using the `Area3D` node's UID to break priority ties, the relative index location of nodes is used. The most recently entered node will always be the last member of the list of `GravityArea3D`s affecting a given body, allowing for a reliable and consistent behavior in line with certain popular adventure games with heavy gravity mechanics.
+
 ## Licenses
 
 - Source code: [MIT License](/LICENSE).

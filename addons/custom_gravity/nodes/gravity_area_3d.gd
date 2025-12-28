@@ -3,11 +3,15 @@ class_name GravityArea3D
 extends Area3D
 
 @export var gravity_resource: Gravity = PointGravity.new()
+@export var gravity_mode := Gravity.Mode.COMBINE
 
 var shape: CollisionShape3D
 
 
 func _ready():
+	if !gravity_mode:
+		gravity_mode = Gravity.Mode.COMBINE
+
 	var children = find_children("*", "CollisionShape3D", false)
 	if len(children) == 1:
 		shape = children[0] as CollisionShape3D
