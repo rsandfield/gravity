@@ -42,5 +42,6 @@ func _on_body_exited(body: Node3D):
 
 
 func get_gravity_at(body_global_transform: Transform3D) -> Vector3:
-	var relative_transform = body_global_transform * global_transform.inverse()
-	return gravity_resource.get_gravity_at(relative_transform.origin)
+	var relative_transform = global_transform.affine_inverse() * body_global_transform
+	var local_gravity = gravity_resource.get_gravity_at(relative_transform.origin)
+	return global_basis * local_gravity

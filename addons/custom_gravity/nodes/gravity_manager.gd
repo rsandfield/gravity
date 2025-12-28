@@ -26,7 +26,7 @@ func get_gravity(body: PhysicsBody3D):
 
 	for area in body_areas:
 		# area.gravity_mode
-		var area_gravity = area.get_gravity_at(body.global_transform.origin)
+		var area_gravity = area.get_gravity_at(body.global_transform)
 		match area.gravity_mode:
 			Gravity.Mode.COMBINE:
 				total_gravity += area_gravity

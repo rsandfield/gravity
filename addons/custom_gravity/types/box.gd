@@ -36,7 +36,6 @@ func _validate_depth():
 
 
 func _get_outer_segment(position: Vector3) -> Vector3:
-	var center = _bounds.get_center()
 	var grav_vec = Vector3.ZERO
 
 	if position.x < _bounds.position.x:
@@ -58,7 +57,6 @@ func _get_outer_segment(position: Vector3) -> Vector3:
 
 
 func _get_inner_segment(position: Vector3) -> Vector3:
-	var center = _bounds.get_center()
 	var grav_vec = Vector3.ZERO
 
 	if position.x < _bounds.position.x + depth:
@@ -96,7 +94,8 @@ func _get_segment(position: Vector3) -> Vector3:
 func _get_edge_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 	# For edges, two axies will be 1. Making a new vector which only has a non-zero value on this
 	# same axis will be tangential by definition
-	var point_a = _bounds.end * grav_vec
+	var inset = Vector3.ONE * (depth if invert else 0)
+	var point_a = (_bounds.end - inset) * grav_vec
 	var point_b = point_a
 	var min_axis = grav_vec.abs().min_axis_index()
 	point_a[min_axis] = _bounds.end[min_axis]
@@ -104,7 +103,7 @@ func _get_edge_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 
 	var closest_point = Geometry3D.get_closest_point_to_segment_uncapped(position, point_a, point_b)
 	var offset = closest_point - position
-	return offset.normalized()
+	return offset.normalized() * (-1 if invert else 1)
 
 
 func _get_corner_gravity(grav_vec: Vector3, position) -> Vector3:
@@ -132,4 +131,4 @@ func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 
 func get_gravity_at(position: Vector3) -> Vector3:
 	var grav_vec = _get_segment(position)
-	return _get_segment_gravity(grav_vec, position) * 9.81
+	return _get_segment_gravity(grav_vec, position) * gravity

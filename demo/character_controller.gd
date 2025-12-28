@@ -4,12 +4,13 @@ extends CharacterBody3D
 @export var ground_acceleration := 4.0
 @export var ground_friction := 2.5
 
-@export var jump_velocity = 7
+@export var jump_velocity = 11
 
 @export var mouse_sensitivity: float = 0.1
 
 @onready var _head: Node3D = $Head
 
+var _jumping := false
 var _gravity := Vector3.ZERO
 var _wish_dir := Vector3.ZERO
 var _paused := false
@@ -28,6 +29,9 @@ func _physics_process(delta: float):
 
 	_apply_gravity(delta)
 	_handle_ground_physics(delta)
+	if _jumping: # && is_on_floor():
+		velocity += up_direction * jump_velocity
+		_jumping = false
 	move_and_slide()
 
 
@@ -35,6 +39,9 @@ func _input(event: InputEvent):
 	_handle_pause(event)
 	if _paused:
 		return
+
+	if event.is_action("ui_accept") && is_on_floor():
+		_jumping = true
 
 	_handle_mouse_input(event)
 
@@ -57,11 +64,11 @@ func _handle_mouse_input(event: InputEvent):
 
 
 func move(dir: Vector2):
-	var right_dir = transform.basis.x
-	var forward_dir = transform.basis.z
+	var right_dir = _head.global_basis.x
+	var forward_dir = _head.global_basis.z
 
-	_wish_dir = (forward_dir * dir.y + right_dir * dir.x).normalized()
-	_wish_dir = _wish_dir.rotated(up_direction, _head.rotation.y)
+	var raw_dir = (forward_dir * dir.y + right_dir * dir.x).normalized()
+	_wish_dir = (raw_dir - up_direction * raw_dir.dot(up_direction)).normalized()
 
 
 func get_ground_speed() -> float:
@@ -84,14 +91,11 @@ func _apply_gravity(delta: float):
 	# Ensure _wish_dir is orthogonal to up_dir
 	_wish_dir = (_wish_dir - up_direction * _wish_dir.dot(up_direction)).normalized()
 
-	var forward_dir = basis.z
-	if abs(forward_dir.dot(up_direction)) > 0.98:
-		forward_dir = basis.x
-	forward_dir = (forward_dir - up_direction * forward_dir.dot(up_direction)).normalized()
+	var curr_quat = global_basis.get_rotation_quaternion()
+	var rotation_diff = Quaternion(global_basis.y, up_direction)
+	var target_quat = (rotation_diff * curr_quat).normalized()
 
-	var right_dir = up_direction.cross(forward_dir).normalized()
-	var orientation = Basis(right_dir, up_direction, forward_dir)
-	basis = basis.slerp(orientation, delta * 10).orthonormalized()
+	global_basis = Basis(curr_quat.slerp(target_quat, delta * 10)).orthonormalized()
 
 	if !is_on_floor():
 		velocity += _gravity * delta
