@@ -1,114 +1,172 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2js1ftq80bk4"]
+[gd_scene load_steps=52 format=3 uid="uid://d2js1ftq80bk4"]
 
 [ext_resource type="Script" uid="uid://ds8biuulikrtx" path="res://addons/custom_gravity/gravity_demo.gd" id="1_dar0o"]
 [ext_resource type="Script" uid="uid://bm0t6i5e2tlwm" path="res://addons/custom_gravity/nodes/gravity_area_3d.gd" id="2_j5lb4"]
 [ext_resource type="Script" uid="uid://dt86ul5pfl2dm" path="res://demo/character_controller.gd" id="2_u10mr"]
+[ext_resource type="Script" uid="uid://urjbxg7wojrv" path="res://addons/custom_gravity/types/box.gd" id="3_u10mr"]
 [ext_resource type="Script" uid="uid://bfu5frk1hgx31" path="res://addons/custom_gravity/types/point_gravity.gd" id="4_j5lb4"]
+[ext_resource type="Script" uid="uid://c3n13ir15u8vj" path="res://addons/custom_gravity/types/torus_gravity.gd" id="4_s1s6j"]
+[ext_resource type="Material" uid="uid://cexhnhlep11gb" path="res://demo/materials/lime.tres" id="5_onvmd"]
+[ext_resource type="Material" uid="uid://csica30066wka" path="res://demo/materials/salmon.tres" id="5_ykvhj"]
+[ext_resource type="Script" uid="uid://dh8nqq6iuevfo" path="res://addons/custom_gravity/types/capsule_gravity.gd" id="6_nk31j"]
+[ext_resource type="Material" uid="uid://d1u45a6jvbiak" path="res://demo/materials/dark_green.tres" id="6_oeqrt"]
+[ext_resource type="Material" uid="uid://dim7t80lywj7v" path="res://demo/materials/red.tres" id="7_ykvhj"]
+[ext_resource type="Material" uid="uid://y6dg541yhmtw" path="res://demo/materials/blue.tres" id="9_1rqa4"]
+[ext_resource type="Material" uid="uid://yli7hlnn4j14" path="res://demo/materials/turquoise.tres" id="10_xm42s"]
+[ext_resource type="PackedScene" uid="uid://cw3s2wcupugvj" path="res://demo/torus.blend" id="12_xm42s"]
+[ext_resource type="PackedScene" uid="uid://duuv280rd4fac" path="res://demo/tube.blend" id="15_svvho"]
+[ext_resource type="Script" uid="uid://koupueyifqco" path="res://addons/custom_gravity/types/cylinder_gravity.gd" id="16_x31ta"]
+[ext_resource type="Script" uid="uid://d8w64sm8ir55" path="res://addons/custom_gravity/types/linear_gravity.gd" id="17_x31ta"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onu7k"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ya44r"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_crclo"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wicj2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1rqa4"]
+radius = 7.5
+
+[sub_resource type="Resource" id="Resource_xm42s"]
+script = ExtResource("4_j5lb4")
+peak_radius = 7.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tdg64"]
+radius = 15.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_nk31j"]
+radius = 7.5
+height = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nk31j"]
+radius = 5.0
+
+[sub_resource type="Resource" id="Resource_nk31j"]
+script = ExtResource("4_j5lb4")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fy1p0"]
+radius = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_fy1p0"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fy1p0"]
+radius = 3.0
+height = 16.0
+
+[sub_resource type="Resource" id="Resource_svvho"]
+script = ExtResource("6_nk31j")
+point_a = Vector3(0, 5, 0)
+point_b = Vector3(0, -5, 0)
+peak_radius = 0.0
+metadata/_custom_type_script = "uid://dh8nqq6iuevfo"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x31ta"]
+radius = 9.0
+height = 28.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d1m6b"]
+radius = 3.0
+height = 16.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_dar0o"]
 size = Vector3(10, 10, 10)
 
-[sub_resource type="Resource" id="Resource_u10mr"]
-script = ExtResource("4_j5lb4")
-peak_radius = 0.0
-metadata/_custom_type_script = "uid://bfu5frk1hgx31"
+[sub_resource type="Resource" id="Resource_ykvhj"]
+script = ExtResource("3_u10mr")
+size = Vector3(10, 10, 10)
+depth = 6.0
+metadata/_custom_type_script = "uid://urjbxg7wojrv"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_onvmd"]
 size = Vector3(30, 30, 30)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5lb4"]
-albedo_color = Color(0, 0.49411765, 1, 1)
-
 [sub_resource type="QuadMesh" id="QuadMesh_j5lb4"]
 size = Vector2(10, 10)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u10mr"]
-albedo_color = Color(0, 1, 1, 1)
+[sub_resource type="Resource" id="Resource_1rqa4"]
+script = ExtResource("3_u10mr")
+size = Vector3(80, 80, 80)
+depth = 10.0
+invert = true
+metadata/_custom_type_script = "uid://urjbxg7wojrv"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onu7k"]
-albedo_color = Color(0, 1, 0, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ykvhj"]
+size = Vector3(80, 80, 80)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1s6j"]
-albedo_color = Color(0, 1, 0.5019608, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm42s"]
+size = Vector3(80, 2, 80)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onvmd"]
-albedo_color = Color(1, 0, 0.5019608, 1)
+[sub_resource type="QuadMesh" id="QuadMesh_tdg64"]
+size = Vector2(80, 80)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oeqrt"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="Resource" id="Resource_tdg64"]
+script = ExtResource("4_s1s6j")
+major_radius = 10.0
+minor_radius = 5.0
+metadata/_custom_type_script = "uid://c3n13ir15u8vj"
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_crclo"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nk31j"]
+height = 10.0
+radius = 12.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_wicj2"]
+[sub_resource type="Resource" id="Resource_d1m6b"]
+script = ExtResource("16_x31ta")
+peak_radius = 0.0
+invert = true
+metadata/_custom_type_script = "uid://koupueyifqco"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k1rqu"]
+height = 15.0
+radius = 4.9
+
+[sub_resource type="Resource" id="Resource_x31ta"]
+script = ExtResource("16_x31ta")
+peak_radius = 0.0
+hollow_radius = 5.0
+metadata/_custom_type_script = "uid://koupueyifqco"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d1m6b"]
+height = 15.0
+radius = 9.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_svvho"]
+size = Vector3(4, 0.1, 16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x31ta"]
+size = Vector3(4, 0.1, 16)
+
+[sub_resource type="Resource" id="Resource_k1rqu"]
+script = ExtResource("17_x31ta")
+metadata/_custom_type_script = "uid://d8w64sm8ir55"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwhtr"]
+size = Vector3(4, 3, 16)
 
 [node name="Demo" type="Node3D"]
 script = ExtResource("1_dar0o")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1, 0)
+floor_max_angle = 1.0471976
 script = ExtResource("2_u10mr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_onu7k")
 
-[node name="Head" type="Node3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ya44r")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7000003, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_dar0o")
-
-[node name="GravityArea3D" type="Area3D" parent="StaticBody3D"]
-gravity_space_override = 2
-script = ExtResource("2_j5lb4")
-gravity_resource = SubResource("Resource_u10mr")
-gravity_mode = null
-metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/GravityArea3D"]
-shape = SubResource("BoxShape3D_onvmd")
-
-[node name="Z+" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-material_override = SubResource("StandardMaterial3D_j5lb4")
-mesh = SubResource("QuadMesh_j5lb4")
-
-[node name="Z-" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -5)
-material_override = SubResource("StandardMaterial3D_u10mr")
-mesh = SubResource("QuadMesh_j5lb4")
-
-[node name="Y+" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 5, 6.556709e-07)
-material_override = SubResource("StandardMaterial3D_onu7k")
-mesh = SubResource("QuadMesh_j5lb4")
-
-[node name="Y-" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, 1.3113416e-07, -1, 1.1464113e-14, -1, -1.3113416e-07, 0, -5, -6.556709e-07)
-material_override = SubResource("StandardMaterial3D_s1s6j")
-mesh = SubResource("QuadMesh_j5lb4")
-
-[node name="X+" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, -2.1855695e-07)
-material_override = SubResource("StandardMaterial3D_onvmd")
-mesh = SubResource("QuadMesh_j5lb4")
-
-[node name="X-" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -5, 0, 2.1855695e-07)
-material_override = SubResource("StandardMaterial3D_oeqrt")
-mesh = SubResource("QuadMesh_j5lb4")
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, -6)
@@ -128,3 +186,265 @@ transform = Transform3D(-0.7071067, 0.49999994, 0.49999994, 0, 0.7071067, -0.707
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_wicj2")
+
+[node name="Gravity" type="Node3D" parent="."]
+
+[node name="Sphere" type="StaticBody3D" parent="Gravity"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Sphere"]
+shape = SubResource("SphereShape3D_1rqa4")
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Sphere"]
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_xm42s")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Sphere/GravityArea3D"]
+shape = SubResource("SphereShape3D_tdg64")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Sphere"]
+material_override = ExtResource("9_1rqa4")
+mesh = SubResource("SphereMesh_nk31j")
+
+[node name="Sphere2" type="StaticBody3D" parent="Gravity"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -10, 30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Sphere2"]
+shape = SubResource("SphereShape3D_nk31j")
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Sphere2"]
+gravity_space_override = 3
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 0.0
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_nk31j")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Sphere2/GravityArea3D"]
+shape = SubResource("SphereShape3D_fy1p0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Sphere2"]
+material_override = ExtResource("6_oeqrt")
+mesh = SubResource("SphereMesh_fy1p0")
+
+[node name="Capsule" type="StaticBody3D" parent="Gravity"]
+transform = Transform3D(0.49999994, 0.43301272, 0.74999994, 0, 0.8660254, -0.49999997, -0.8660254, 0.24999999, 0.43301263, 5.296012, -0.71118736, 22.999516)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Capsule"]
+shape = SubResource("CapsuleShape3D_fy1p0")
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Capsule"]
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_svvho")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Capsule/GravityArea3D"]
+shape = SubResource("CapsuleShape3D_x31ta")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Capsule"]
+material_override = ExtResource("7_ykvhj")
+mesh = SubResource("CapsuleMesh_d1m6b")
+
+[node name="Cube" type="StaticBody3D" parent="Gravity"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Cube"]
+shape = SubResource("BoxShape3D_dar0o")
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Cube"]
+gravity_space_override = 3
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_ykvhj")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Cube/GravityArea3D"]
+shape = SubResource("BoxShape3D_onvmd")
+
+[node name="X+" type="MeshInstance3D" parent="Gravity/Cube"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, -2.1855695e-07)
+material_override = ExtResource("5_ykvhj")
+mesh = SubResource("QuadMesh_j5lb4")
+
+[node name="X-" type="MeshInstance3D" parent="Gravity/Cube"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -5, 0, 2.1855695e-07)
+material_override = ExtResource("7_ykvhj")
+mesh = SubResource("QuadMesh_j5lb4")
+
+[node name="Y+" type="MeshInstance3D" parent="Gravity/Cube"]
+transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 5, 6.556709e-07)
+material_override = ExtResource("5_onvmd")
+mesh = SubResource("QuadMesh_j5lb4")
+
+[node name="Y-" type="MeshInstance3D" parent="Gravity/Cube"]
+transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, 1.3113416e-07, -1, 1.1464113e-14, -1, -1.3113416e-07, 0, -5, -6.556709e-07)
+material_override = ExtResource("6_oeqrt")
+mesh = SubResource("QuadMesh_j5lb4")
+
+[node name="Z+" type="MeshInstance3D" parent="Gravity/Cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+material_override = ExtResource("9_1rqa4")
+mesh = SubResource("QuadMesh_j5lb4")
+
+[node name="Z-" type="MeshInstance3D" parent="Gravity/Cube"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -5)
+material_override = ExtResource("10_xm42s")
+mesh = SubResource("QuadMesh_j5lb4")
+
+[node name="Shell" type="StaticBody3D" parent="Gravity"]
+transform = Transform3D(0.70710653, -0.7071065, 0, 0.4999998, 0.49999976, -0.7071067, 0.4999998, 0.49999976, 0.7071067, 0, 0, 0)
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Shell"]
+transform = Transform3D(0.99999994, 2.2351738e-08, 4.4703487e-08, -2.2351742e-08, 0.99999994, 5.960465e-08, -4.4703484e-08, -5.9604645e-08, 1, 0, 0, 0)
+gravity_space_override = 3
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_1rqa4")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Shell/GravityArea3D"]
+shape = SubResource("BoxShape3D_ykvhj")
+
+[node name="X+" type="CollisionShape3D" parent="Gravity/Shell"]
+transform = Transform3D(-4.3711385e-08, 0.9999999, 0, -0.9999999, -4.3711385e-08, 0, 0, 0, 1, 41, 0, 0)
+shape = SubResource("BoxShape3D_xm42s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Shell/X+"]
+transform = Transform3D(1.0000002, 0, 0, 0, -4.3711385e-08, -1.0000001, 0, 0.99999994, -4.3711392e-08, 0, -1, 0)
+material_override = ExtResource("5_ykvhj")
+mesh = SubResource("QuadMesh_tdg64")
+skeleton = NodePath("../..")
+
+[node name="X-" type="CollisionShape3D" parent="Gravity/Shell"]
+transform = Transform3D(-4.371138e-08, -0.9999999, 0, 0.9999998, -4.3711385e-08, 0, 0, 0, 1, -41, 0, 0)
+shape = SubResource("BoxShape3D_xm42s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Shell/X-"]
+transform = Transform3D(1.0000002, 0, 0, 0, -4.3711385e-08, -1.0000001, 0, 0.99999994, -4.3711392e-08, 0, -1, 0)
+material_override = ExtResource("7_ykvhj")
+mesh = SubResource("QuadMesh_tdg64")
+skeleton = NodePath("../..")
+
+[node name="Z+" type="CollisionShape3D" parent="Gravity/Shell"]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, 0, 0, 41)
+shape = SubResource("BoxShape3D_xm42s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Shell/Z+"]
+transform = Transform3D(1.0000002, 0, 0, 0, -4.3711385e-08, -1.0000001, 0, 0.99999994, -4.3711392e-08, 0, -1, 0)
+material_override = ExtResource("9_1rqa4")
+mesh = SubResource("QuadMesh_tdg64")
+skeleton = NodePath("../..")
+
+[node name="Z-" type="CollisionShape3D" parent="Gravity/Shell"]
+transform = Transform3D(0.9999998, 0, 0, 0, -4.3711385e-08, 1, 0, -0.9999999, -4.371139e-08, 0, 0, -41)
+shape = SubResource("BoxShape3D_xm42s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Shell/Z-"]
+transform = Transform3D(1.0000002, 0, 0, 0, -4.3711385e-08, -1.0000001, 0, 0.99999994, -4.3711392e-08, 0, -1, 0)
+material_override = ExtResource("10_xm42s")
+mesh = SubResource("QuadMesh_tdg64")
+skeleton = NodePath("../..")
+
+[node name="Y+" type="CollisionShape3D" parent="Gravity/Shell"]
+transform = Transform3D(0.9999999, -7.4505806e-08, 5.2154064e-08, -1.4901161e-08, 0.99999994, 0, -1.4901161e-07, -8.940697e-08, 1, 0, 41, 0)
+shape = SubResource("BoxShape3D_xm42s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Shell/Y+"]
+transform = Transform3D(1.0000002, 0, 0, 0, -4.3711385e-08, -1.0000001, 0, 0.99999994, -4.3711392e-08, 0, -1, 0)
+material_override = ExtResource("5_onvmd")
+mesh = SubResource("QuadMesh_tdg64")
+skeleton = NodePath("../..")
+
+[node name="Y-" type="CollisionShape3D" parent="Gravity/Shell"]
+transform = Transform3D(0.9999999, 0, 0, 0, -0.99999994, 8.742278e-08, 0, -8.742277e-08, -1, 0, -41, 0)
+shape = SubResource("BoxShape3D_xm42s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Shell/Y-"]
+transform = Transform3D(1.0000002, 0, 0, 0, -4.3711385e-08, -1.0000001, 0, 0.99999994, -4.3711392e-08, 0, -1, 0)
+material_override = ExtResource("6_oeqrt")
+mesh = SubResource("QuadMesh_tdg64")
+skeleton = NodePath("../..")
+
+[node name="Torus" parent="Gravity" instance=ExtResource("12_xm42s")]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -10, -20, 0)
+
+[node name="Torus" parent="Gravity/Torus" index="0"]
+material_override = ExtResource("10_xm42s")
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Torus"]
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_tdg64")
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Torus/GravityArea3D"]
+shape = SubResource("CylinderShape3D_nk31j")
+
+[node name="tube" parent="Gravity" instance=ExtResource("15_svvho")]
+transform = Transform3D(0.2961981, -0.81379753, 0.49999997, 0.93969256, 0.3420201, 0, -0.17101006, 0.46984622, 0.8660253, 21.5, -12, -14)
+
+[node name="Cylinder" parent="Gravity/tube" index="0"]
+transform = Transform3D(1, -7.450581e-09, 4.4703484e-08, 0, 1, 5.9604645e-08, -2.9802322e-08, -2.9802322e-08, 1, 0, 0, 0)
+material_override = ExtResource("5_ykvhj")
+
+[node name="Inner" type="Area3D" parent="Gravity/tube"]
+priority = 2
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_d1m6b")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/tube/Inner"]
+shape = SubResource("CylinderShape3D_k1rqu")
+
+[node name="Outer" type="Area3D" parent="Gravity/tube"]
+priority = 1
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_x31ta")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/tube/Outer"]
+shape = SubResource("CylinderShape3D_d1m6b")
+
+[node name="Ramp" type="StaticBody3D" parent="Gravity"]
+transform = Transform3D(-0.50000006, 0.5566703, 0.6634139, 0, 0.7660444, -0.6427875, -0.8660254, -0.3213938, -0.38302225, 3.75, -3.75, -3.75)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+shape = SubResource("BoxShape3D_svvho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gravity/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+material_override = ExtResource("7_ykvhj")
+mesh = SubResource("BoxMesh_x31ta")
+
+[node name="GravityArea3D" type="Area3D" parent="Gravity/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 8)
+priority = 1
+gravity_space_override = 3
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_k1rqu")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Ramp/GravityArea3D"]
+shape = SubResource("BoxShape3D_wwhtr")
+
+[node name="GravityArea3D2" type="Area3D" parent="Gravity/Ramp"]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -1.5, 8)
+priority = 1
+gravity_space_override = 3
+script = ExtResource("2_j5lb4")
+gravity_resource = SubResource("Resource_k1rqu")
+gravity_mode = 2
+metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gravity/Ramp/GravityArea3D2"]
+shape = SubResource("BoxShape3D_wwhtr")
+
+[editable path="Gravity/Torus"]
+[editable path="Gravity/tube"]
