@@ -21,13 +21,15 @@ extends Gravity
 func get_gravity_at(position: Vector3) -> Vector3:
 	var closest_point = Geometry3D.get_closest_point_to_segment_uncapped(position, point_a, point_b)
 	var offset = closest_point - position
+	var distance = offset.length()
+	if is_zero_approx(distance):
+		return Vector3.ZERO
+
 	var base_vector = offset.normalized() * gravity
 	if invert:
 		base_vector *= -1
-	if offset.length() < hollow_radius:
-		return Vector3.ZERO
 	if peak_radius <= 0:
-		# constant strength
 		return base_vector
-
-	return base_vector * (offset.length_squared() - peak_radius) / (peak_radius ** 0.5)
+	if distance > peak_radius:
+		return base_vector * (peak_radius ** 2) / (distance ** 2)
+	return base_vector * (distance ** 2) / (peak_radius ** 2)
