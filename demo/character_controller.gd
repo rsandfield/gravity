@@ -15,6 +15,8 @@ var _gravity := Vector3.ZERO
 var _wish_dir := Vector3.ZERO
 var _paused := false
 
+var _projectile_scene = preload("res://demo/projectile.tscn")
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -29,7 +31,7 @@ func _physics_process(delta: float):
 
 	_apply_gravity(delta)
 	_handle_ground_physics(delta)
-	if _jumping: # && is_on_floor():
+	if _jumping:
 		velocity += up_direction * jump_velocity
 		_jumping = false
 	move_and_slide()
@@ -62,6 +64,16 @@ func _handle_mouse_input(event: InputEvent):
 		_head.rotation.y = fposmod(_head.rotation.y, TAU)
 		_head.rotation.x = clamp(_head.rotation.x, -PI / 2, PI / 2)
 
+	if event is InputEventMouseButton:
+		_shoot()
+
+
+func _shoot():
+	var projectile = _projectile_scene.instantiate()
+	get_tree().root.add_child(projectile)
+	projectile.global_transform = global_transform
+	projectile.global_position += _head.global_basis.z * -3
+	projectile.linear_velocity = _head.global_basis.z.normalized() * -50
 
 func move(dir: Vector2):
 	var right_dir = _head.global_basis.x

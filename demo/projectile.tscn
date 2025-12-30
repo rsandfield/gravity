@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bayga7s1xw7s2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_md6lq"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md6lq"]
+albedo_color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+metallic = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_w8hjm"]
+radius = 0.25
+height = 0.5
+
+[node name="Projectile" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_md6lq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_md6lq")
+mesh = SubResource("SphereMesh_w8hjm")
