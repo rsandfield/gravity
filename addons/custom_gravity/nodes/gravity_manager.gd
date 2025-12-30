@@ -1,7 +1,25 @@
 extends Node
 
+class BodyTracker:
+	var active_area: GravityArea3D
+	var areas: Array[GravityArea3D] = []
+
+	func get_areas() -> Array[GravityArea3D]:
+		return areas.duplicate()
+
+	func append(area: GravityArea3D):
+		areas.append(area)
+
+	func erase(area: GravityArea3D) -> bool:
+		areas.erase(area)
+		return areas.is_empty()
+	
+	func find(area: GravityArea3D) -> int:
+		return areas.find(area)
+
+
 var areas: Dictionary[GravityArea3D, Array] = {}
-var bodies: Dictionary[PhysicsBody3D, Array] = {}
+var bodies: Dictionary[PhysicsBody3D, BodyTracker] = {}
 
 func _physics_process(delta):
 	for body in bodies:
@@ -16,11 +34,12 @@ func get_gravity(body: PhysicsBody3D):
 	var total_gravity = Vector3.ZERO
 
 	# Sort areas by priority, preserving seniority within each priority.
-	var body_areas = bodies[body].duplicate()
+	var tracker = bodies[body]
+	var body_areas = tracker.get_areas()
 	body_areas.sort_custom(func(a, b):
 		# When priority is equal, return the newest entry
 		if a.priority == b.priority:
-			return bodies[body].find(a) > bodies[body].find(b)
+			return tracker.find(a) > tracker.find(b)
 		return a.priority > b.priority
 	)
 
@@ -43,9 +62,8 @@ func get_gravity(body: PhysicsBody3D):
 
 func _remove_body_area(body: PhysicsBody3D, area: GravityArea3D):
 	if bodies.has(body):
-		bodies[body].erase(area)
-		if bodies[body].is_empty():
-				bodies.erase(body)
+		if bodies[body].erase(area):
+			bodies.erase(body)
 
 func register_gravity_area(area: GravityArea3D):
 	areas[area] = []
@@ -59,7 +77,7 @@ func body_entered_area(body: PhysicsBody3D, area: GravityArea3D):
 	if !areas[area].has(body):
 		areas[area].append(body)
 		if !bodies.has(body):
-			bodies[body] = []
+			bodies[body] = BodyTracker.new()
 		bodies[body].append(area)
 
 func body_exited_area(body: PhysicsBody3D, area: GravityArea3D):
