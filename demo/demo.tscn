@@ -117,10 +117,10 @@ metadata/_custom_type_script = "uid://urjbxg7wojrv"
 size = Vector3(60, 60, 70)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm42s"]
-size = Vector3(80, 2, 80)
+size = Vector3(60, 2, 70)
 
 [sub_resource type="QuadMesh" id="QuadMesh_tdg64"]
-size = Vector2(80, 80)
+size = Vector2(60, 70)
 
 [sub_resource type="Resource" id="Resource_tdg64"]
 script = ExtResource("4_s1s6j")

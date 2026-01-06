@@ -1,5 +1,7 @@
 # Custom Gravity
 
+![Screenshot of demo scene](./demo/screenshot.png)
+
 Override and extend the standard physics gravity
 
 ## Introduction
