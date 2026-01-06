@@ -3,15 +3,11 @@ class_name GravityArea3D
 extends Area3D
 
 @export var gravity_resource: Gravity = PointGravity.new()
-@export var gravity_mode := Gravity.Mode.COMBINE
 
 var shape: CollisionShape3D
 
 
 func _ready():
-	if !gravity_mode:
-		gravity_mode = Gravity.Mode.COMBINE
-
 	var children = find_children("*", "CollisionShape3D", false)
 	if len(children) == 1:
 		shape = children[0] as CollisionShape3D
@@ -45,3 +41,8 @@ func get_gravity_at(body_global_transform: Transform3D) -> Vector3:
 	var relative_transform = global_transform.affine_inverse() * body_global_transform
 	var local_gravity = gravity_resource.get_gravity_at(relative_transform.origin)
 	return global_basis * local_gravity
+
+
+func is_within_influence(body_global_transform: Transform3D) -> bool:
+	var relative_transform = global_transform.affine_inverse() * body_global_transform
+	return gravity_resource.is_within_influence(relative_transform.origin)

@@ -132,3 +132,35 @@ func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 func get_gravity_at(position: Vector3) -> Vector3:
 	var grav_vec = _get_segment(position)
 	return _get_segment_gravity(grav_vec, position) * gravity
+
+
+func is_within_influence(position: Vector3) -> bool:
+	if !shrink_fit:
+		return true
+
+	var abs_pos = position.abs()
+	var half_size = size * 0.5
+	var depth_vector = Vector3.ONE * depth
+
+	if !invert:
+		# Normal mode: outside the box, within depth distance
+		# Must be outside on at least one axis and not too far on any axis
+		var outside = abs_pos.x > half_size.x || abs_pos.y > half_size.y || abs_pos.z > half_size.z
+		if !outside:
+			return false
+		var too_far = (
+			abs_pos.x > half_size.x + depth
+			|| abs_pos.y > half_size.y + depth
+			|| abs_pos.z > half_size.z + depth
+		)
+		return !too_far
+
+	# Inverted mode: inside the box, within depth distance from walls
+	# Check each axis - must be inside on all axes
+	if abs_pos.x > half_size.x || abs_pos.y > half_size.y || abs_pos.z > half_size.z:
+		return false
+	# Must be close to at least one wall (within depth distance on any axis)
+	var near_x = abs_pos.x > half_size.x - depth
+	var near_y = abs_pos.y > half_size.y - depth
+	var near_z = abs_pos.z > half_size.z - depth
+	return near_x || near_y || near_z
