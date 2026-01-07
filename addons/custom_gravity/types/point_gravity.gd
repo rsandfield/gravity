@@ -8,16 +8,10 @@ extends Gravity
 		center = value
 		changed.emit()
 
-## Strength of acceleration applied to physics bodies within the area
-@export var gravity: float = 9.81:
-	set(value):
-		gravity = value
-		changed.emit()
-
 ## The radius at which gravity is equal to the set value.
 ## When positive, the value will weaken exponentially with absolute difference from this radius.
 ## When non-positive, acceleration will be constant throughout the area.
-@export var peak_radius: float = 1:
+@export var peak_radius: float = 0:
 	set(value):
 		peak_radius = value
 		changed.emit()
@@ -37,7 +31,7 @@ extends Gravity
 
 func get_gravity_at(position: Vector3) -> Vector3:
 	var offset = center - position
-	var base_vector = offset.normalized() * gravity
+	var base_vector = offset.normalized() 
 	if invert:
 		base_vector *= -1
 	if offset.length() < hollow_radius:

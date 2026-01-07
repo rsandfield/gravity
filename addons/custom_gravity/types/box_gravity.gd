@@ -21,12 +21,6 @@ var _bounds: AABB = AABB(Vector3.ONE * -5, Vector3.ONE * 10)
 		_validate_depth()
 		changed.emit()
 
-## Strength of acceleration applied to physics bodies within the area
-@export var gravity: float = 9.81:
-	set(value):
-		gravity = value
-		changed.emit()
-
 ## When true, gravity will be inverted and push away from the center.
 @export var invert: bool = false:
 	set(value):
@@ -118,7 +112,7 @@ func _get_corner_gravity(grav_vec: Vector3, position) -> Vector3:
 	var corner_offset = Vector3.ONE * depth if invert else Vector3.ZERO
 	var corner = (_bounds.end - corner_offset) * grav_vec
 	var offset = corner - position
-	return offset.normalized() * gravity * (-1 if invert else 1)
+	return offset.normalized()  * (-1 if invert else 1)
 
 
 func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
@@ -139,7 +133,7 @@ func _get_segment_gravity(grav_vec: Vector3, position: Vector3) -> Vector3:
 
 func get_gravity_at(position: Vector3) -> Vector3:
 	var grav_vec = _get_segment(position)
-	return _get_segment_gravity(grav_vec, position) * gravity
+	return _get_segment_gravity(grav_vec, position) 
 
 
 func is_within_influence(position: Vector3) -> bool:

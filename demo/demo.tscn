@@ -73,7 +73,6 @@ height = 16.0
 script = ExtResource("6_nk31j")
 point_a = Vector3(0, 5, 0)
 point_b = Vector3(0, -5, 0)
-peak_radius = 0.0
 metadata/_custom_type_script = "uid://dh8nqq6iuevfo"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x31ta"]
@@ -138,7 +137,6 @@ emission = Color(0, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_d1m6b"]
 script = ExtResource("16_x31ta")
-peak_radius = 0.0
 invert = true
 metadata/_custom_type_script = "uid://koupueyifqco"
 
@@ -148,7 +146,6 @@ radius = 4.9
 
 [sub_resource type="Resource" id="Resource_x31ta"]
 script = ExtResource("16_x31ta")
-peak_radius = 0.0
 hollow_radius = 5.0
 shrink_fit = true
 metadata/_custom_type_script = "uid://koupueyifqco"
@@ -231,7 +228,6 @@ shape = SubResource("SphereShape3D_1rqa4")
 gravity_space_override = 3
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 0.0
 script = ExtResource("2_j5lb4")
 gravity_resource = SubResource("Resource_xm42s")
 metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
@@ -253,7 +249,6 @@ shape = SubResource("SphereShape3D_nk31j")
 gravity_space_override = 3
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 0.0
 script = ExtResource("2_j5lb4")
 gravity_resource = SubResource("Resource_nk31j")
 metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
@@ -430,7 +425,6 @@ priority = 1
 gravity_space_override = 3
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 0.0
 script = ExtResource("2_j5lb4")
 gravity_resource = SubResource("Resource_tdg64")
 metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
@@ -455,14 +449,13 @@ transform = Transform3D(0.2961981, -0.81379753, 0.49999997, 0.93969256, 0.342020
 
 [node name="Cylinder" parent="Gravity/tube" index="0"]
 transform = Transform3D(1, -7.450581e-09, 4.4703484e-08, 0, 1, 5.9604645e-08, -2.9802322e-08, -2.9802322e-08, 1, 0, 0, 0)
-material_override = ExtResource("5_ykvhj")
+material_override = ExtResource("5_onvmd")
 
 [node name="InnerCylinder" type="Area3D" parent="Gravity/tube"]
 priority = 2
 gravity_space_override = 3
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 0.0
 script = ExtResource("2_j5lb4")
 gravity_resource = SubResource("Resource_d1m6b")
 metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"
@@ -475,7 +468,6 @@ priority = 1
 gravity_space_override = 3
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 0.0
 script = ExtResource("2_j5lb4")
 gravity_resource = SubResource("Resource_x31ta")
 metadata/_custom_type_script = "uid://bm0t6i5e2tlwm"

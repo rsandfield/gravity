@@ -40,12 +40,6 @@ extends Gravity
 	get:
 		return hollow_radius
 
-## Strength of acceleration applied to physics bodies within the area
-@export var gravity: float = 9.81:
-	set(value):
-		gravity = value
-		changed.emit()
-
 ## When true, gravity will be inverted and push away from the center.
 @export var invert: bool = false:
 	set(value):
@@ -70,7 +64,7 @@ func get_gravity_at(position: Vector3) -> Vector3:
 	if is_zero_approx(distance) || distance > minor_radius || distance < hollow_radius - 0.01:
 		return Vector3.ZERO
 
-	var base_vector = -offset.normalized() * gravity
+	var base_vector = -offset.normalized() 
 	if invert:
 		base_vector *= -1
 	if peak_radius <= 0:

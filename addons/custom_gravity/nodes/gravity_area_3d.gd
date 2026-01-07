@@ -28,19 +28,19 @@ func _exit_tree():
 
 
 func _on_body_entered(body: Node3D):
-	if body is PhysicsBody3D:
+	if body is PhysicsBody3D && body is not StaticBody3D:
 		GravityManager.body_entered_area(body, self)
 
 
 func _on_body_exited(body: Node3D):
-	if body is PhysicsBody3D:
+	if body is PhysicsBody3D && body is not StaticBody3D:
 		GravityManager.body_exited_area(body, self)
 
 
 func get_gravity_at(body_global_transform: Transform3D) -> Vector3:
 	var relative_transform = global_transform.affine_inverse() * body_global_transform
-	var local_gravity = gravity_resource.get_gravity_at(relative_transform.origin)
-	return global_basis * local_gravity
+	var local_vector = gravity_resource.get_gravity_at(relative_transform.origin)
+	return global_basis * local_vector * gravity
 
 
 func is_within_influence(body_global_transform: Transform3D) -> bool:
