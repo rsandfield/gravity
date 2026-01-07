@@ -3,7 +3,6 @@ class_name BoxGravity
 extends Gravity
 
 var _bounds: AABB = AABB(Vector3.ONE * -5, Vector3.ONE * 10)
-var _depth: float = 4
 
 ## Size of the box surface
 @export var size: Vector3:
@@ -11,19 +10,28 @@ var _depth: float = 4
 		_bounds.size = value
 		_bounds.position = value * -0.5
 		_validate_depth()
+		changed.emit()
 	get:
 		return _bounds.size
+
 ## Depth of the gravity field away from the box survace
-@export var depth: float:
+@export var depth: float = 4:
 	set(value):
-		_depth = value
+		depth = value
 		_validate_depth()
-	get:
-		return _depth
+		changed.emit()
+
 ## Strength of acceleration applied to physics bodies within the area
-@export var gravity: float = 9.81
+@export var gravity: float = 9.81:
+	set(value):
+		gravity = value
+		changed.emit()
+
 ## When true, gravity will be inverted and push away from the center.
-@export var invert: bool = false
+@export var invert: bool = false:
+	set(value):
+		invert = value
+		changed.emit()
 
 
 ## When using invert mode, gravity depth cannot exceed the smallest dimension
@@ -31,8 +39,8 @@ func _validate_depth():
 	if !invert:
 		return
 	var half_least_side = _bounds.get_shortest_axis_size() * 0.5
-	if _depth > half_least_side:
-		_depth = half_least_side
+	if depth > half_least_side:
+		depth = half_least_side
 
 
 func _get_outer_segment(position: Vector3) -> Vector3:

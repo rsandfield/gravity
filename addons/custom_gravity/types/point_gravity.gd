@@ -3,17 +3,36 @@ class_name PointGravity
 extends Gravity
 
 ## The offset from node position for the gravity point source
-@export var center: Vector3 = Vector3.ZERO
+@export var center: Vector3 = Vector3.ZERO:
+	set(value):
+		center = value
+		changed.emit()
+
 ## Strength of acceleration applied to physics bodies within the area
-@export var gravity: float = 9.81
+@export var gravity: float = 9.81:
+	set(value):
+		gravity = value
+		changed.emit()
+
 ## The radius at which gravity is equal to the set value.
 ## When positive, the value will weaken exponentially with absolute difference from this radius.
 ## When non-positive, acceleration will be constant throughout the area.
-@export var peak_radius: float = 1
+@export var peak_radius: float = 1:
+	set(value):
+		peak_radius = value
+		changed.emit()
+
 ## When positive, gravity will not be applied to objects within this radius.
-@export var hollow_radius: float = 0
+@export var hollow_radius: float = 0:
+	set(value):
+		hollow_radius = value
+		changed.emit()
+
 ## When true, gravity will be inverted and push away from the center.
-@export var invert: bool = false
+@export var invert: bool = false:
+	set(value):
+		invert = value
+		changed.emit()
 
 
 func get_gravity_at(position: Vector3) -> Vector3:

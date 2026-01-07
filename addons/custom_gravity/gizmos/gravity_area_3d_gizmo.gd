@@ -21,6 +21,14 @@ func setup(node: GravityArea3D):
 		node.child_entered_tree.connect(_on_child_added)
 		node.property_list_changed.connect(_on_structure_changed)
 	_node = node
+	_connect_gravity_resource()
+
+
+func _connect_gravity_resource():
+	if !_node.gravity_resource:
+		return
+	if !_node.gravity_resource.changed.is_connected(_on_structure_changed):
+		_node.gravity_resource.changed.connect(_on_structure_changed)
 
 
 func _on_child_added(_node):
@@ -28,6 +36,7 @@ func _on_child_added(_node):
 
 
 func _on_structure_changed():
+	_connect_gravity_resource()
 	for child in _node.get_children():
 		if child is CollisionShape3D:
 			if !child.property_list_changed.is_connected(_on_structure_changed):

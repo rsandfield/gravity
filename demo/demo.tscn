@@ -114,7 +114,7 @@ shrink_fit = true
 metadata/_custom_type_script = "uid://urjbxg7wojrv"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ykvhj"]
-size = Vector3(60, 60, 70)
+size = Vector3(50, 60, 70)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm42s"]
 size = Vector3(60, 2, 70)
@@ -126,7 +126,6 @@ size = Vector2(60, 70)
 script = ExtResource("4_s1s6j")
 major_radius = 10.0
 minor_radius = 6.0
-hollow_radius = 0.0
 metadata/_custom_type_script = "uid://c3n13ir15u8vj"
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nk31j"]
