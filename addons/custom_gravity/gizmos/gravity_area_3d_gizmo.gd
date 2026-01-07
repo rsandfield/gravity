@@ -91,9 +91,9 @@ func _redraw():
 	var debug_mesh = shape.get_debug_mesh()
 	var bounds: AABB = debug_mesh.get_aabb()
 
-	var x_step = bounds.size.x / floor(bounds.size.x / 3)
-	var y_step = bounds.size.y / floor(bounds.size.y / 3)
-	var z_step = bounds.size.z / floor(bounds.size.z / 3)
+	var x_step = bounds.size.x / max(1, floor(bounds.size.x / 3))
+	var y_step = bounds.size.y / max(1, floor(bounds.size.y / 3))
+	var z_step = bounds.size.z / max(1, floor(bounds.size.z / 3))
 
 	var x = bounds.position.x + x_step * 0.5
 	var y = bounds.position.y + y_step * 0.5
