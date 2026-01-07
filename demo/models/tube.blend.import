@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cw3s2wcupugvj"
-path="res://.godot/imported/torus.blend-3ad2900fa6c842053d46c99634b54d90.scn"
+uid="uid://duuv280rd4fac"
+path="res://.godot/imported/tube.blend-bafdc595840832cc038845ce2ee19c06.scn"
 
 [deps]
 
-source_file="res://demo/torus.blend"
-dest_files=["res://.godot/imported/torus.blend-3ad2900fa6c842053d46c99634b54d90.scn"]
+source_file="res://demo/models/tube.blend"
+dest_files=["res://.godot/imported/tube.blend-bafdc595840832cc038845ce2ee19c06.scn"]
 
 [params]
 
