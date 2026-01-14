@@ -117,8 +117,6 @@ func get_gravity(body: PhysicsBody3D):
 
 	if tracker.active_area != previous_area:
 		tracker.last_switch_frame = current_frame
-		var area_name = tracker.active_area.name if tracker.active_area else "none"
-		print("%s primary gravity is now %s" % [body.name, area_name])
 
 	return total_gravity
 
@@ -143,11 +141,9 @@ func body_entered_area(body: PhysicsBody3D, area: GravityArea3D):
 	if !bodies.has(body):
 		bodies[body] = BodyTracker.new()
 	bodies[body].append(area)
-	print("%s has entered %s" % [body.name, area.name])
 
 func body_exited_area(body: PhysicsBody3D, area: GravityArea3D):
 	if areas.has(area):
 		areas[area].erase(body)
 
 	_remove_body_area(body, area)
-	print("%s has exited %s" % [body.name, area.name])
