@@ -3,8 +3,9 @@ extends CharacterBody3D
 const MINIMUM_PUSHABLE_MASS_RATIO := 0.25
 const PUSH_FORCE_MULTIPLIER := 5.0
 
-@export var mass = 80
-@export var walk_speed = 3
+@export var mass := 80.0
+@export var walk_speed := 3.0
+@export var sprint_speed := 7.0
 @export var ground_acceleration := 4.0
 @export var ground_friction := 2.5
 
@@ -114,6 +115,8 @@ func _push_away_rigid_bodies():
 
 
 func get_ground_speed() -> float:
+	if Input.is_action_pressed("sprint"):
+		return sprint_speed
 	return walk_speed
 
 
@@ -121,7 +124,7 @@ func _handle_ground_physics(_delta: float):
 	if !is_on_floor():
 		return
 
-	velocity = _wish_dir * walk_speed
+	velocity = _wish_dir * get_ground_speed()
 
 
 func _apply_gravity(delta: float):
